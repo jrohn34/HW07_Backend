@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PancakeHouseMenu extends Menu {
+public class CafeMenu extends Menu {
     private List<MenuItem> menuItems;
 
-    public PancakeHouseMenu(String name, String description) {
+    public CafeMenu(String name, String description) {
         super(name, description);
         menuItems = new ArrayList<>();
 
-        addItem("K&B's Pancake Breakfast",
-                "Pancakes with scrambled eggs and toast",
-                true,
-                2.99);
-
-        addItem("Regular Pancake Breakfast",
-                "Pancakes with fried eggs, sausage",
+        addItem("Cappuccino",
+                "Espresso with steamed milk foam",
                 false,
-                2.99);
-
-        addItem("Blueberry Pancakes",
-                "Pancakes made with fresh blueberries",
-                true,
                 3.49);
 
-        addItem("Waffles",
-                "Waffles with your choice of blueberries or strawberries",
-                true,
+        addItem("Latte",
+                "Espresso with steamed milk",
+                false,
+                3.29);
+
+        addItem("Mocha",
+                "Espresso with steamed milk and chocolate",
+                false,
                 3.59);
+
+        addItem("Espresso",
+                "Short black coffee",
+                false,
+                2.49);
     }
 
     public void addItem(String name, String description,
@@ -51,6 +51,7 @@ public class PancakeHouseMenu extends Menu {
         return stringBuilder.toString();
     }
 
+    @Override
     public Iterator<MenuItem> createIterator() {
         return menuItems.iterator();
     }
