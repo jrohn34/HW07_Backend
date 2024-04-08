@@ -50,6 +50,32 @@ public class MenuController {
         return breakfastItems;
     }
 
+    @GetMapping("/lunch")
+    public List<MenuItemRecord> getLunchItems() {
+        List<MenuItemRecord> lunchItems = new ArrayList<>();
+        Iterator<MenuItem> iterator = allMenus.createIterator();
+        while (iterator.hasNext()) {
+            MenuItem item = iterator.next();
+            if (item.getDescription().toLowerCase().contains("lunch")) {
+                lunchItems.add(new MenuItemRecord(item.getName(), item.getDescription(), item.isVegetarian(), item.getPrice()));
+            }
+        }
+        return lunchItems;
+    }
+
+    @GetMapping("/dinner")
+    public List<MenuItemRecord> getDinnerItems() {
+        List<MenuItemRecord> dinnerItems = new ArrayList<>();
+        Iterator<MenuItem> iterator = allMenus.createIterator();
+        while (iterator.hasNext()) {
+            MenuItem item = iterator.next();
+            if (item.getDescription().toLowerCase().contains("dinner")) {
+                dinnerItems.add(new MenuItemRecord(item.getName(), item.getDescription(), item.isVegetarian(), item.getPrice()));
+            }
+        }
+        return dinnerItems;
+    }
+
 
     @PostMapping("/signup")
     public String signUp(@RequestParam String username, @RequestParam String password, @RequestParam String email) {
