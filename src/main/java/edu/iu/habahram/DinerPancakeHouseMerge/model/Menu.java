@@ -1,15 +1,14 @@
 package edu.iu.habahram.DinerPancakeHouseMerge.model;
 
-import org.springframework.util.CompositeIterator;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Menu extends MenuComponent {
-    private List<MenuComponent> menuComponents = new ArrayList<>();
-    private String name;
-    private String description;
+public class Menu extends MenuComponent{
+    ArrayList<MenuComponent> menuComponents = new ArrayList<MenuComponent>();
+    String name;
+    String description;
 
     public Menu(String name, String description) {
         this.name = name;
@@ -25,7 +24,7 @@ public class Menu extends MenuComponent {
     }
 
     public MenuComponent getChild(int i) {
-        return menuComponents.get(i);
+        return (MenuComponent)menuComponents.get(i);
     }
 
     public String getName() {
@@ -36,21 +35,17 @@ public class Menu extends MenuComponent {
         return description;
     }
 
-    @Override
-    public Iterator<MenuItem> createIterator() {
-        return null;
-    }
-
-    public List<MenuComponent> getMenuComponents() {
-        return menuComponents;
-    }
-
-
-    public Iterator<MenuItem> getMenuIterator() {
+    public MenuItem[] getItems() {
         List<MenuItem> items = new ArrayList<>();
-        for (MenuComponent menuComponent : menuComponents) {
-            items.add((MenuItem) menuComponent);
+        for (MenuComponent component : menuComponents) {
+            MenuItem[] componentItems = component.getItems();
+            items.addAll(Arrays.asList(componentItems));
         }
-        return items.iterator();
+        return items.toArray(new MenuItem[0]);
+    }
+
+    @Override
+    public Iterator<MenuComponent> createIterator() {
+        return new CompositeIterator(menuComponents.iterator());
     }
 }
